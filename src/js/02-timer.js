@@ -3,6 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 let selectedDate;
+let timerId;
 
 const flatpickrOptions = {
   enableTime: true,
@@ -27,7 +28,7 @@ const inputRef = document.querySelector('input[type="text"]');
 
 function onStartClick() {
   startBtnRef.disabled = true;
-  interval = setInterval(timerHandler, 1000);
+  timerId = setInterval(timerHandler, 1000);
 }
 
 function timerHandler() {
@@ -41,7 +42,7 @@ function timerHandler() {
     hours = '00';
     minutes = '00';
     seconds = '00';
-    clearInterval(interval);
+    clearInterval(timerId);
     Notify.success('The timer has ran out');
     inputRef.disabled = false;
   }
