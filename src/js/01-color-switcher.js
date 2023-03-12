@@ -17,7 +17,7 @@ startRef.addEventListener('click', onStartClick);
 function onStartClick() {
   startRef.disabled = true;
   stopRef.disabled = false;
-  timerId = setInterval(changeBodyRandomColor, 1000);
+  const timerId = setInterval(changeBodyRandomColor, 1000);
 }
 
 stopRef.addEventListener('click', onStopClick);
