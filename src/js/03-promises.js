@@ -8,17 +8,22 @@ function onFormClick(e) {
   const { amount, delay, step } = e.target.elements;
   let totalDelay = Number(delay.value);
   for (let i = 1; i <= amount.value; i += 1) {
-    setTimeout(createPromise, totalDelay, i, totalDelay);
-    console.log('totalDelay :', totalDelay);
+    createPromise(i, totalDelay)
+      .then(value => Notify.success(value))
+      .catch(error => Notify.failure(error));
     totalDelay += Number(step.value);
   }
 }
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
-  } else {
-    Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-  }
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      if (shouldResolve) {
+        res(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      } else {
+        rej(`❌ Rejected promise ${position} in ${delay}ms`);
+      }
+    }, delay);
+  });
 }
