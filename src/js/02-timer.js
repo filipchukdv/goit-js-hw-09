@@ -27,7 +27,7 @@ const inputRef = document.querySelector('input[type="text"]');
 
 function onStartClick() {
   startBtnRef.disabled = true;
-  const interval = setInterval(timerHandler, 1000);
+  interval = setInterval(timerHandler, 1000);
 }
 
 function timerHandler() {
